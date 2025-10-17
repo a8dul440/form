@@ -1,0 +1,2169 @@
+<!doctype html>
+<html lang="ur" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <title>رجسٹری پروفارمہ</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    /* All your existing CSS styles remain exactly the same */
+    @font-face {
+      font-family: 'LocalNastaleeq';
+      src: local('Jameel Noori Nastaleeq'), local('Nafees Nastaleeq'), local('Noto Nastaliq Urdu');
+    }
+
+    :root {
+      --primary: #1e3a8a;
+      --primary-light: #3b82f6;
+      --secondary: #2563eb;
+      --info: #059669;
+      --danger: #dc2626;
+      --warning: #d97706;
+      --light-gray: #f8fafc;
+      --white: #fff;
+      --border: #e2e8f0;
+      --shadow: rgba(0,0,0,0.08);
+      --gray-bg: #6b7280;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "LocalNastaleeq", "Noto Nastaliq Urdu", "Urdu Typesetting", serif;
+      background: linear-gradient(135deg, #f0f4f8 0%, #e2e8f0 100%);
+      direction: rtl;
+      line-height: 1.4;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 18px auto;
+      padding: 18px;
+      display: grid;
+      grid-template-columns: minmax(350px, 380px) 1fr;
+      gap: 24px;
+    }
+
+    .panel {
+      background: var(--white);
+      padding: 24px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      border: 1px solid rgba(255,255,255,0.5);
+      backdrop-filter: blur(10px);
+    }
+
+    h1 {
+      margin: 0 0 16px;
+      font-size: 25px;
+      text-align: center;
+      color: var(--primary);
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--primary-light);
+      font-weight: normal;
+    }
+
+    label {
+      display: block;
+      margin: 12px 0 6px;
+      font-size: 19px;
+      font-weight: normal;
+      color: var(--primary);
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 20px 0;
+    }
+
+    /* Inputs: modern design - unbolded */
+    input[type="text"], .cnic {
+      width: 100%;
+      padding: 10px 12px;
+      margin-bottom: 8px;
+      font-size: 19px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-family: inherit;
+      direction: rtl;
+      text-align: right;
+      font-weight: normal;
+      transition: all 0.3s ease;
+      color: var(--primary);
+      background: #f8fafc;
+    }
+
+    input[type="text"]:focus, .cnic:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+      background: white;
+    }
+
+    /* Make specific inputs 2px larger and underlined */
+    #taskNo, #mauza, #area { 
+      font-size: 21px;
+      font-weight: normal;
+      text-align: center; 
+      border-bottom: 2px solid var(--primary);
+      border-radius: 0;
+      padding-bottom: 8px;
+      color: var(--primary);
+    }
+
+    /* name fields slightly bigger too */
+    #sellerName, #buyerName, #verifierName { 
+      font-size: 21px;
+      font-weight: normal;
+      color: var(--primary);
+    }
+
+    .row {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .row > input {
+      flex: 1;
+    }
+
+    /* Modern button styles - unbolded */
+    .btn { 
+      padding: 12px 22px; 
+      border: 0; 
+      border-radius: 10px; 
+      cursor: pointer; 
+      font-size: 19px;
+      font-weight: normal;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff !important;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      position: relative;
+      overflow: hidden;
+      font-family: "LocalNastaleeq", serif;
+    }
+
+    .btn:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255,255,255,0.1);
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
+    }
+
+    .btn:hover:after {
+      transform: translateX(0);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--secondary), var(--primary));
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 6px 16px rgba(37, 99, 235, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .btn-info {
+      background: linear-gradient(135deg, var(--info), #0a7c5d);
+    }
+
+    .btn-info:hover {
+      box-shadow: 0 6px 16px rgba(5, 150, 105, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .btn-danger {
+      background: linear-gradient(135deg, var(--danger), #b91c1c);
+    }
+
+    .btn-danger:hover {
+      box-shadow: 0 6px 16px rgba(220, 38, 38, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .btn-warning {
+      background: linear-gradient(135deg, var(--warning), #b45309);
+    }
+
+    .btn-warning:hover {
+      box-shadow: 0 6px 16px rgba(217, 119, 6, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .btn-ghost {
+      background: transparent; 
+      color: var(--secondary) !important; 
+      border: 2px solid var(--secondary);
+      box-shadow: none;
+    }
+
+    .btn-ghost:hover {
+      background: rgba(37, 99, 235, 0.1);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+    }
+
+    .btn-small {
+      padding: 8px 16px;
+      font-size: 17px;
+    }
+
+    .add-btn { 
+      background: var(--info); 
+      color: #ffffff; 
+      font-size: 19px;
+      padding: 10px 14px; 
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      transition: all 0.3s;
+      font-weight: normal;
+    }
+
+    .add-btn:hover {
+      background: #047857;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(5, 150, 105, 0.4);
+    }
+
+    /* hide the left-side "live-list" duplicates */
+    .live-list { 
+      display: none; 
+    }
+
+    /* Radio button styles - unbolded */
+    .radio-group {
+      display: flex;
+      gap: 20px;
+      margin: 18px 0;
+      justify-content: center;
+      background: #f1f5f9;
+      padding: 12px;
+      border-radius: 10px;
+    }
+
+    .radio-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      font-size: 19px;
+      font-weight: normal;
+      color: var(--primary);
+      padding: 8px 16px;
+      border-radius: 8px;
+      transition: all 0.2s;
+    }
+
+    .radio-label:hover {
+      background: rgba(255,255,255,0.7);
+    }
+
+    .radio-input {
+      width: 20px;
+      height: 20px;
+      accent-color: var(--secondary);
+    }
+
+    /* Paper / printable preview */
+    .paper {
+      width: 100%;
+      background: white;
+      padding: 24px;
+      box-sizing: border-box;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      color: #000000;
+      border-radius: 8px;
+      line-height: 1.5;
+    }
+
+    .paper h2 { 
+      text-align: center; 
+      margin: 0 0 8px;
+      font-size: 28px;
+      color: #000000;
+      font-weight: bold;
+      border-bottom: 2px solid #000;
+      padding-bottom: 8px;
+      line-height: 1.5;
+    }
+
+    .meta-line {
+      margin: 7px 0 0;
+      font-size: 20px;
+      text-align: center;
+      font-weight: bold;
+      white-space: pre-wrap;
+      line-height: 1.5;
+      color: #000000;
+    }
+
+    .highlighted {
+      font-size: 22px;
+      font-weight: bold;
+      color: #000000;
+    }
+
+    /* Table styling with optimized height */
+    table.form-table { 
+      width: 100%; 
+      border-collapse: collapse; 
+      font-size: 18px;
+      margin-top: 12px;
+      color: #000000;
+    }
+
+    table.form-table th, 
+    table.form-table td { 
+      border: 1px solid #333; 
+      padding: 10px 12px;
+      text-align: center; 
+      color: #000000;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      white-space: normal;
+      line-height: 1.5;
+    }
+
+    table.form-table th { 
+      background: var(--gray-bg) !important;
+      font-weight: bold;
+      color: #000000;
+      font-size: 20px;
+    }
+
+    /* Name column with bold and increased font */
+    table.form-table td:nth-child(2) {
+      font-weight: bold;
+      font-size: 20px;
+    }
+
+    /* CNIC and Mobile columns with bold font and proper wrapping */
+    table.form-table td:nth-child(3),
+    table.form-table td:nth-child(4) {
+      font-weight: bold;
+      direction: ltr;
+      white-space: normal;
+      word-break: break-word;
+      font-size: 18px;
+    }
+
+    table.form-table td.signature { 
+      height: 120px;
+      width: 200px; 
+    }
+
+    table.form-table td:first-child { 
+      width: 70px; 
+    }
+
+    .after-sign { 
+      margin-top: 8px;
+      text-align: center; 
+      font-size: 19px;
+      font-weight: bold; 
+      color: #000000;
+      line-height: 1.5;
+    }
+
+    .after-table { 
+      margin-top: 20px;
+      font-size: 19px;
+      line-height: 1.5;
+      white-space: pre; 
+      color: #000000;
+      font-weight: bold;
+    }
+
+    .paper.hidden { 
+      display: none; 
+    }
+
+    /* Center block styling */
+    .center-block {
+      text-align: center;
+      font-weight: bold;
+      margin: 12px 0;
+      line-height: 1.5;
+      font-size: 19px;
+      background: #f8f9fa;
+      padding: 12px;
+      border-radius: 6px;
+    }
+
+    /* Delete button in preview table */
+    .delete-btn {
+      background: var(--danger);
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 6px 12px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.2s;
+      font-family: "LocalNastaleeq", "Noto Nastaliq Urdu", "Urdu Typesetting", serif;
+    }
+
+    .delete-btn:hover {
+      background: #b91c1c;
+      transform: scale(1.05);
+    }
+
+    /* Modal styles - Full screen */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.8);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 24px;
+      border-radius: 12px;
+      width: 95%;
+      height: 95%;
+      overflow-y: auto;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 12px;
+      position: sticky;
+      top: 0;
+      background: white;
+      z-index: 1;
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      font-size: 28px;
+      cursor: pointer;
+      color: var(--primary);
+      transition: transform 0.2s;
+    }
+
+    .modal-close:hover {
+      transform: scale(1.1);
+    }
+
+    .search-container {
+      margin-bottom: 20px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .search-input {
+      flex: 1;
+      padding: 12px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 16px;
+      background: #f8fafc;
+    }
+
+    .search-btn {
+      padding: 12px 24px;
+      background: var(--secondary);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.3s;
+    }
+
+    .search-btn:hover {
+      background: var(--primary);
+      transform: translateY(-2px);
+    }
+
+    .record-item {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 18px;
+      margin-bottom: 12px;
+      transition: all 0.3s;
+      background: white;
+    }
+
+    .record-item:hover {
+      background: var(--light-gray);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .record-header {
+      font-weight: bold;
+      font-size: 18px;
+      margin-bottom: 10px;
+      color: var(--primary);
+    }
+
+    .record-details {
+      font-size: 16px;
+      color: #666;
+      margin-bottom: 12px;
+    }
+
+    .compact-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0;
+      font-size: 14px;
+    }
+
+    .compact-table th {
+      background: #f0f8ff;
+      color: #000000;
+      font-weight: bold;
+      padding: 8px 6px;
+      border: 1px solid #ddd;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .compact-table td {
+      padding: 6px 8px;
+      border: 1px solid #ddd;
+      text-align: center;
+      white-space: normal;
+      word-wrap: break-word;
+    }
+
+    .compact-table .cnic-cell,
+    .compact-table .mobile-cell {
+      direction: ltr;
+      font-weight: bold;
+      font-size: 13px;
+    }
+
+    .party-section {
+      margin: 18px 0;
+    }
+
+    .party-section h4 {
+      margin: 0 0 10px 0;
+      color: var(--primary);
+      font-size: 16px;
+      background: #f8f9fa;
+      padding: 10px;
+      border-radius: 6px;
+    }
+
+    .record-actions {
+      margin-top: 18px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .no-records {
+      text-align: center;
+      padding: 40px 20px;
+      color: #666;
+      font-size: 18px;
+    }
+
+    /* NEW: Global Success Message - Fixed at top left corner */
+    .global-success-message {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background-color: #d4edda;
+      color: #155724;
+      padding: 15px 20px;
+      border-radius: 8px;
+      border-left: 4px solid #28a745;
+      z-index: 10000;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      display: none;
+      max-width: 400px;
+      font-size: 16px;
+    }
+
+    /* Empty state for preview panel */
+    .empty-state {
+      text-align: center;
+      padding: 40px 20px;
+      color: #666;
+      background: #f8f9fa;
+      border-radius: 8px;
+    }
+    
+    .empty-state h3 {
+      margin: 0 0 12px;
+      font-size: 22px;
+    }
+    
+    .empty-state p {
+      margin: 0;
+      font-size: 17px;
+    }
+
+    /* Position relative for preview panel to position success message */
+    .panel[aria-label="preview-panel"] {
+      position: relative;
+    }
+
+    /* Settings panel styles */
+    .settings-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .setting-group {
+      margin-bottom: 16px;
+    }
+
+    .setting-group label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .setting-input {
+      width: 100%;
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 16px;
+    }
+
+    .setting-unit {
+      font-size: 14px;
+      color: #666;
+      margin-left: 8px;
+    }
+
+    .preview-box {
+      border: 2px dashed var(--border);
+      padding: 16px;
+      margin-top: 20px;
+      background: #f8f9fa;
+      border-radius: 8px;
+    }
+
+    .preview-box h4 {
+      margin: 0 0 12px 0;
+      text-align: center;
+      color: var(--primary);
+    }
+
+    /* Backup info styles */
+    .backup-info {
+      background: #e8f4fd;
+      border: 1px solid #b6d7e8;
+      border-radius: 8px;
+      padding: 15px;
+      margin: 15px 0;
+      font-size: 14px;
+    }
+
+    .backup-info h4 {
+      margin: 0 0 10px 0;
+      color: var(--primary);
+      text-align: center;
+      font-weight: normal;
+    }
+
+    /* Action buttons grid */
+    .action-buttons-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .action-buttons-grid .btn {
+      width: 100%;
+    }
+
+    /* PRINT STYLES - Fixed RTL and blank page issues */
+    @media print {
+      /* Reset body and hide everything */
+      body, html {
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100% !important;
+        height: auto !important;
+        background: white !important;
+        overflow: visible !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        direction: rtl;
+      }
+      
+      /* Hide everything except the paper */
+      body * {
+        visibility: hidden;
+        margin: 0 !important;
+        padding: 0 !important;
+        background: transparent !important;
+      }
+      
+      /* Show only the paper container and its contents */
+      #paper, 
+      #paper * {
+        visibility: visible;
+        color: #000000 !important;
+        background: white !important;
+        background-color: white !important;
+        direction: rtl;
+      }
+      
+      /* Remove all background colors from paper elements except table header */
+      #paper * {
+        background: transparent !important;
+        background-color: transparent !important;
+      }
+      
+      /* Keep grey background only for table header */
+      table.form-table th {
+        background: var(--gray-bg) !important;
+        background-color: var(--gray-bg) !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      
+      /* Keep background for center block */
+      .center-block {
+        background: #f8f9fa !important;
+        background-color: #f8f9fa !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      
+      /* FIXED: Proper RTL paper positioning and blank page prevention */
+      #paper {
+        position: relative !important;
+        left: 0 !important;
+        top: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+        min-height: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        box-shadow: none !important;
+        border: none !important;
+        display: block !important;
+        background: white !important;
+        background-color: white !important;
+        page-break-inside: avoid !important;
+        page-break-after: avoid !important;
+        page-break-before: avoid !important;
+        overflow: visible !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        direction: rtl;
+      }
+      
+      /* FIXED: RTL-aware @page margins */
+      @page {
+        size: 8.5in 14in;
+        margin: 0.5in 1in 1in 1in;
+      }
+      
+      /* Ensure RTL for all text elements in print */
+      .paper, .meta-line, .center-block, .after-table, .after-sign,
+      table.form-table, table.form-table th, table.form-table td {
+        direction: rtl !important;
+        text-align: right !important;
+      }
+      
+      /* CNIC and Mobile should remain LTR */
+      table.form-table td:nth-child(3),
+      table.form-table td:nth-child(4) {
+        direction: ltr !important;
+        text-align: center !important;
+      }
+      
+      /* Ensure content doesn't break across pages */
+      table {
+        page-break-inside: avoid !important;
+      }
+      
+      p, div {
+        page-break-inside: avoid !important;
+      }
+      
+      /* Hide delete column in print */
+      .action-column,
+      .delete-btn {
+        display: none !important;
+      }
+      
+      /* Optimize table for print */
+      table.form-table th, 
+      table.form-table td { 
+        padding: 4px 6px !important;
+        font-size: 16px !important;
+        background: transparent !important;
+      }
+      
+      table.form-table th { 
+        background: var(--gray-bg) !important;
+        background-color: var(--gray-bg) !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      
+      table.form-table td.signature { 
+        height: 70px !important;
+      }
+      
+      /* Reduce spacing for print */
+      .paper h2 {
+        font-size: 22px !important;
+        margin-bottom: 4px !important;
+        padding-bottom: 4px !important;
+        text-align: center !important;
+      }
+      
+      .meta-line {
+        font-size: 18px !important;
+        margin: 4px 0 !important;
+        text-align: center !important;
+      }
+      
+      .highlighted {
+        font-size: 20px !important;
+      }
+      
+      .paper p {
+        font-size: 18px !important;
+        line-height: 1.4 !important;
+        margin-bottom: 6px !important;
+        text-align: justify !important;
+      }
+      
+      .center-block {
+        margin: 8px 0 !important;
+        padding: 8px !important;
+        font-size: 17px !important;
+        background: #f8f9fa !important;
+        background-color: #f8f9fa !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        text-align: center !important;
+      }
+      
+      .after-table {
+        margin-top: 12px !important;
+        font-size: 17px !important;
+        text-align: right !important;
+      }
+      
+      .after-sign {
+        font-size: 17px !important;
+        text-align: center !important;
+      }
+    }
+
+    /* Responsive design */
+    @media (max-width: 900px) {
+      .container { 
+        grid-template-columns: 1fr; 
+        padding: 12px; 
+        gap: 16px;
+      }
+      
+      .panel {
+        padding: 16px;
+      }
+      
+      .row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      
+      .row > input {
+        width: 100%;
+      }
+      
+      .settings-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .action-buttons-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      /* Adjust global success message for mobile */
+      .global-success-message {
+        top: 10px;
+        left: 10px;
+        right: 10px;
+        max-width: none;
+      }
+    }
+
+    /* Success message styling */
+    .success-message {
+      background-color: #d4edda;
+      color: #155724;
+      padding: 10px;
+      border-radius: 4px;
+      margin-bottom: 12px;
+      text-align: center;
+      display: none;
+    }
+    
+    /* Empty state for preview panel */
+    .empty-state {
+      text-align: center;
+      padding: 30px 20px;
+      color: #666;
+    }
+    
+    .empty-state h3 {
+      margin: 0 0 8px;
+      font-size: 21px;
+    }
+    
+    .empty-state p {
+      margin: 0;
+      font-size: 17px;
+    }
+  </style>
+</head>
+<body>
+  <!-- NEW: Global Success Message - Fixed at top left corner -->
+  <div class="global-success-message" id="globalSuccessMessage"></div>
+
+  <div class="container">
+    <!-- LEFT PANEL -->
+    <div class="panel" aria-label="input-panel">
+      <h1>فارم بھریں</h1>
+      
+      <!-- Radio buttons for transaction type -->
+      <div class="radio-group">
+        <label class="radio-label">
+          <input type="radio" name="transactionType" class="radio-input" value="sale" checked>
+          بیع
+        </label>
+        <label class="radio-label">
+          <input type="radio" name="transactionType" class="radio-input" value="gift">
+          ھبہ
+        </label>
+      </div>
+
+      <label for="taskNo">۱۔ ٹاسک نمبر</label>
+      <input id="taskNo" type="text" autocomplete="off" />
+
+      <label for="mauza">۲۔ موضع</label>
+      <input id="mauza" type="text" autocomplete="off" />
+
+      <label for="area">۳۔ رقبہ</label>
+      <input id="area" type="text" dir="ltr" style="text-align:center;" placeholder="K-M-F" />
+
+      <hr>
+
+      <!-- Sellers/Wahib -->
+      <label id="sellerLabel">۴۔ نام بائع</label>
+      <div class="row">
+        <input id="sellerName" type="text" placeholder="نام بائع" />
+        <button type="button" class="add-btn" tabindex="-1" onclick="addEntry('sellers')" aria-label="Add seller">➕</button>
+      </div>
+      <div class="row">
+        <input id="sellerCnic" class="cnic" type="text" maxlength="15" inputmode="numeric" placeholder="xxxxx-xxxxxxx-x" />
+        <input id="sellerMobile" type="text" maxlength="12" inputmode="numeric" placeholder="03XXXXXXXXX" dir="ltr" style="text-align:left;" />
+      </div>
+      <div id="sellersList" class="live-list" aria-hidden="true"></div>
+
+      <!-- Buyers/Mauhoob Ilaihi -->
+      <label id="buyerLabel">۵۔ نام مشتری</label>
+      <div class="row">
+        <input id="buyerName" type="text" placeholder="نام مشتری" />
+        <button type="button" class="add-btn" tabindex="-1" onclick="addEntry('buyers')" aria-label="Add buyer">➕</button>
+      </div>
+      <div class="row">
+        <input id="buyerCnic" class="cnic" type="text" maxlength="15" inputmode="numeric" placeholder="xxxxx-xxxxxxx-x" />
+        <input id="buyerMobile" type="text" maxlength="12" inputmode="numeric" placeholder="03XXXXXXXXX" dir="ltr" style="text-align:left;" />
+      </div>
+      <div id="buyersList" class="live-list" aria-hidden="true"></div>
+
+      <!-- Verifiers -->
+      <label>۶۔ شناخت کنندہ</label>
+      <div class="row">
+        <input id="verifierName" type="text" placeholder="نام" />
+        <button type="button" class="add-btn" tabindex="-1" onclick="addEntry('verifiers')" aria-label="Add verifier">➕</button>
+      </div>
+      <div class="row">
+        <input id="verifierCnic" class="cnic" type="text" maxlength="15" inputmode="numeric" placeholder="xxxxx-xxxxxxx-x" />
+        <input id="verifierMobile" type="text" maxlength="12" inputmode="numeric" placeholder="03XXXXXXXXX" dir="ltr" style="text-align:left;" />
+      </div>
+      <div id="verifiersList" class="live-list" aria-hidden="true"></div>
+
+      <!-- NEW: Empty Field Button -->
+      <div style="margin-top: 10px; text-align: center;">
+        <button type="button" class="btn btn-warning" onclick="addEmptyField()">خالی خانہ ایڈ کریں</button>
+      </div>
+
+      <!-- Link field -->
+      <label for="link">۷۔ لنک</label>
+      <input id="link" type="text" autocomplete="off" placeholder="رجسٹری لنک یہاں پیسٹ کریں" />
+
+      <!-- Backup Information -->
+      <div class="backup-info">
+        <h4>📁 ڈیٹا بیک اپ</h4>
+        <p>آپ کا ڈیٹا خود بخود محفوظ ہو جاتا ہے۔ بحالی کے لیے بیک اپ فائل لوڈ کریں۔</p>
+        <div style="text-align: center; margin-top: 10px;">
+          <button id="exportBtn" class="btn btn-info btn-small" type="button">ڈیٹا ڈاؤن لوڈ کریں</button>
+          <button id="importBtn" class="btn btn-warning btn-small" type="button">ڈیٹا لوڈ کریں</button>
+        </div>
+      </div>
+
+      <!-- Action Buttons Grid - Arranged at the end -->
+      <div class="action-buttons-grid">
+        <button id="printBtn" class="btn btn-primary" type="button">پرنٹ/محفوظ کریں</button>
+        <button id="historyBtn" class="btn btn-info" type="button">سابقہ ریکارڈ</button>
+        <button id="settingsBtn" class="btn btn-warning" type="button">پرنٹ ترتیبات</button>
+        <button id="resetBtn" class="btn btn-ghost" type="button">ری سیٹ</button>
+      </div>
+    </div>
+
+    <!-- RIGHT PANEL (preview / printable) -->
+    <div class="panel" aria-label="preview-panel">
+      <div id="paper" class="paper hidden" role="document" aria-live="polite">
+        <h2>☆حصہ ریکارڈ☆</h2>
+
+        <!-- single line meta with 2 spaces between labels and outputs -->
+        <div class="meta-line" id="metaLine">پروفارمہ اندراجی نمبر -------- ٹاسک نمبر: &ensp;<span class="highlighted" id="outTaskNo">-</span> &ensp;موضع:&ensp;<span class="highlighted" id="outMauza">-</span>&ensp;رقبہ:&ensp;<span class="highlighted" id="outArea" dir="ltr" style="font-family:monospace">-</span>&ensp;مورخہ: -------
+        </div>
+
+        <!-- Long paragraph - reduced line height and margins -->
+        <p style="font-size:20px;line-height:1.6;text-align:justify; margin-top: 0; margin-bottom: 8px;">
+          امروز رجسٹری ہذا سب رجسٹرار آفس دیپالپور بغرض بیانات پیش کی گئی ہے، ہم جملہ تصدیق کنندگان تصدیق کرتے ہیں کہ رقبہ ہذا بمطابق شیڈول سرکار ہے اور حدود اربعہ کے عین مطابق ہے، کسی غیر منظور شدہ کالونی میں واقع نہ ہے، اور نہ ہی فیس ادائیگی میں کوئی کمی، اگر مستقبل میں کمی فیس یا حدود اربعہ کی بایت کوئی ایسی صورتحال سامنے آئی جس سے خزانہ سرکار کو نقصان پہنچا یا اندیشہ ہوا، جملہ تصدیق کنندگان رجسٹری ہذا ذمہ دار ہونگے اور قانونی کاروائی کا سامنا کریں گے۔ بطور خاص مشتری حدود اربعہ کا موجودہ پابندیوں کے تضاد کا ذمہ دار ہوگا۔ رجسٹری ہذا کے متعلقہ کسی بھی وقت وزٹ ہوا اگر تضاد پایا گیا تو بطور خاص مشتری ذمہ دار ہوگا۔
+        </p>
+
+        <!-- Center block with reduced margins -->
+        <div class="center-block">
+          اندراج کنندہ لوگن ہولڈر<br>
+          نام معہ ولدیت: عبدالستار ولد محمد سبحان<br>
+          شناختی کارڈ نمبر: <span style="direction:ltr; unicode-bidi:embed;">35301-2078691-7</span><br>
+          موبائل: <span style="direction:ltr; unicode-bidi:embed;">0300-2829440</span><br>
+          دستخط / مہر: ______________________<br>
+          <span class="after-sign">تصدیق تحریر ہے تاکہ ای رجسٹریشن ریکارڈ کا حصہ رہے۔</span>
+        </div>
+
+        <!-- Table with optimized height -->
+        <table class="form-table" role="table" aria-label="entries table">
+          <thead>
+            <tr><th>حیثیت</th><th>نام</th><th>CNIC</th><th>موبائل</th><th>دستخط / انگوٹھا</th><th class="action-column">حذف</th></tr>
+          </thead>
+          <tbody id="entriesTable"></tbody>
+        </table>
+
+        <!-- After table with reduced margin -->
+        <div class="after-table">
+دفتری استعمال:
+						جناب عالی پرفارمہ ہذا کو ای رجسٹری ریکارڈ کا حصہ بنادیا گیا ہے۔
+																						دستخط رجسٹری محرر
+
+						سن کر درست تسلیم ہے۔							
+																				دستخط سب رجسٹرار دیپالپور
+        </div>
+      </div>
+      
+      <!-- Empty state for preview panel -->
+      <div id="emptyState" class="empty-state">
+        <h3>پیش نظارہ</h3>
+        <p>فارم دیکھنے کے لیے ڈیٹا مکمل کریں</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal for previous records -->
+  <div id="historyModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 style="margin: 0;">سابقہ ریکارڈ</h2>
+        <button class="modal-close">&times;</button>
+      </div>
+      <div class="search-container">
+        <input type="text" id="searchInput" class="search-input" placeholder="تلاش کریں (ٹاسک نمبر، موضع، رقبہ، نام)">
+        <button id="searchBtn" class="search-btn">تلاش</button>
+      </div>
+      <div id="recordsList">
+        <!-- Records will be loaded here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal for print settings -->
+  <div id="settingsModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 style="margin: 0;">پرنٹ ترتیبات</h2>
+        <button class="modal-close">&times;</button>
+      </div>
+      
+      <div class="settings-grid">
+        <div class="setting-group">
+          <label for="paperWidth">
+            کاغذ کی چوڑائی
+            <span class="setting-unit">(انچ)</span>
+          </label>
+          <input type="number" id="paperWidth" class="setting-input" step="0.1" min="5" max="20" value="8.5">
+        </div>
+        
+        <div class="setting-group">
+          <label for="paperHeight">
+            کاغذ کی لمبائی
+            <span class="setting-unit">(انچ)</span>
+          </label>
+          <input type="number" id="paperHeight" class="setting-input" step="0.1" min="5" max="20" value="14">
+        </div>
+        
+        <div class="setting-group">
+          <label for="marginTop">
+            اوپر کا مارجن
+            <span class="setting-unit">(انچ)</span>
+          </label>
+          <input type="number" id="marginTop" class="setting-input" step="0.1" min="0" max="5" value="-8.5">
+        </div>
+        
+        <div class="setting-group">
+          <label for="marginRight">
+            دائیں کا مارجن
+            <span class="setting-unit">(انچ)</span>
+          </label>
+          <input type="number" id="marginRight" class="setting-input" step="0.1" min="-5" max="5" value="0.75">
+        </div>
+        
+        <div class="setting-group">
+          <label for="marginBottom">
+            نیچے کا مارجن
+            <span class="setting-unit">(انچ)</span>
+          </label>
+          <input type="number" id="marginBottom" class="setting-input" step="0.1" min="0" max="5" value="1">
+        </div>
+        
+        <div class="setting-group">
+          <label for="marginLeft">
+            بائیں کا مارجن
+            <span class="setting-unit">(انچ)</span>
+          </label>
+          <input type="number" id="marginLeft" class="setting-input" step="0.1" min="0" max="5" value="0.75">
+        </div>
+        
+        <div class="setting-group">
+          <label for="fontSize">
+            فونٹ سائز
+            <span class="setting-unit">(پکسل)</span>
+          </label>
+          <input type="number" id="fontSize" class="setting-input" step="1" min="10" max="24" value="17">
+        </div>
+        
+        <div class="setting-group">
+          <label for="tablePadding">
+            ٹیبل پڈنگ
+            <span class="setting-unit">(پکسل)</span>
+          </label>
+          <input type="number" id="tablePadding" class="setting-input" step="1" min="2" max="20" value="4">
+        </div>
+      </div>
+      
+      <div class="preview-box">
+        <h4>پرنٹ پیش نظارہ</h4>
+        <p>کاغذ کا سائز: <span id="previewPaperSize">8.5 x 14 انچ</span></p>
+        <p>مارجن: <span id="previewMargins">اوپر 0.5, دائیں 1, نیچے 1, بائیں 1 انچ</span></p>
+        <p>فونٹ سائز: <span id="previewFontSize">17 پکسل</span></p>
+      </div>
+      
+      <div style="margin-top: 20px; display: flex; gap: 12px; flex-wrap: wrap;">
+        <button id="applySettings" class="btn btn-primary" type="button">ترتیبات لاگو کریں</button>
+        <button id="resetSettings" class="btn btn-ghost" type="button">ڈیفالٹ پر واپس</button>
+        <button id="testPrint" class="btn btn-info" type="button">ٹیسٹ پرنٹ</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hidden file input for import -->
+  <input type="file" id="importFile" accept=".json" style="display: none;">
+
+<script>
+// GitHub Pages Data Storage System
+class GitHubPagesStorage {
+  constructor() {
+    this.storageKey = 'registrationRecords';
+    this.autoBackupKey = 'registration_backup';
+  }
+
+  // Save data to localStorage with auto backup
+  saveData(records) {
+    try {
+      localStorage.setItem(this.storageKey, JSON.stringify(records));
+      // Create auto backup
+      const backup = {
+        timestamp: new Date().toISOString(),
+        data: records
+      };
+      localStorage.setItem(this.autoBackupKey, JSON.stringify(backup));
+      return true;
+    } catch (error) {
+      console.error('Error saving data:', error);
+      return false;
+    }
+  }
+
+  // Load data from localStorage
+  loadData() {
+    try {
+      const data = localStorage.getItem(this.storageKey);
+      return data ? JSON.parse(data) : [];
+    } catch (error) {
+      console.error('Error loading data:', error);
+      return [];
+    }
+  }
+
+  // Export data as downloadable file
+  exportData(records) {
+    const dataStr = JSON.stringify(records, null, 2);
+    const dataBlob = new Blob([dataStr], { type: 'application/json' });
+    const url = URL.createObjectURL(dataBlob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `registration_data_${new Date().toISOString().split('T')[0]}.json`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  }
+
+  // Import data from file
+  importData(file, onSuccess, onError) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      try {
+        const importedData = JSON.parse(e.target.result);
+        onSuccess(importedData);
+      } catch (error) {
+        onError(error);
+      }
+    };
+    reader.onerror = onError;
+    reader.readAsText(file);
+  }
+
+  // Restore from backup if main data is corrupted
+  restoreFromBackup() {
+    try {
+      const backup = localStorage.getItem(this.autoBackupKey);
+      if (backup) {
+        const backupData = JSON.parse(backup);
+        if (backupData.data) {
+          this.saveData(backupData.data);
+          return backupData.data;
+        }
+      }
+    } catch (error) {
+      console.error('Error restoring from backup:', error);
+    }
+    return null;
+  }
+}
+
+// Initialize the application
+document.addEventListener('DOMContentLoaded', function () {
+  // Initialize storage system
+  const storage = new GitHubPagesStorage();
+  
+  // data arrays
+  const sellers = [], buyers = [], verifiers = [];
+  
+  // Track if current data is loaded from a previous record
+  let isLoadedFromRecord = false;
+  
+  // Track transaction type (sale/gift)
+  let transactionType = 'sale';
+
+  // DOM refs
+  const taskNo = document.getElementById('taskNo');
+  const mauza = document.getElementById('mauza');
+  const area = document.getElementById('area');
+  const link = document.getElementById('link');
+  const outTaskNo = document.getElementById('outTaskNo');
+  const outMauza = document.getElementById('outMauza');
+  const outArea = document.getElementById('outArea');
+  const paper = document.getElementById('paper');
+  const entriesTable = document.getElementById('entriesTable');
+  const printBtn = document.getElementById('printBtn');
+  const historyBtn = document.getElementById('historyBtn');
+  const settingsBtn = document.getElementById('settingsBtn');
+  const exportBtn = document.getElementById('exportBtn');
+  const importBtn = document.getElementById('importBtn');
+  const resetBtn = document.getElementById('resetBtn');
+  const globalSuccessMessage = document.getElementById('globalSuccessMessage');
+  const emptyState = document.getElementById('emptyState');
+  const historyModal = document.getElementById('historyModal');
+  const settingsModal = document.getElementById('settingsModal');
+  const recordsList = document.getElementById('recordsList');
+  const modalClose = document.querySelectorAll('.modal-close');
+  const searchInput = document.getElementById('searchInput');
+  const searchBtn = document.getElementById('searchBtn');
+  const sellerLabel = document.getElementById('sellerLabel');
+  const buyerLabel = document.getElementById('buyerLabel');
+  const transactionRadios = document.querySelectorAll('input[name="transactionType"]');
+  const importFile = document.getElementById('importFile');
+  
+  // Settings DOM refs
+  const paperWidth = document.getElementById('paperWidth');
+  const paperHeight = document.getElementById('paperHeight');
+  const marginTop = document.getElementById('marginTop');
+  const marginRight = document.getElementById('marginRight');
+  const marginBottom = document.getElementById('marginBottom');
+  const marginLeft = document.getElementById('marginLeft');
+  const fontSize = document.getElementById('fontSize');
+  const tablePadding = document.getElementById('tablePadding');
+  const applySettings = document.getElementById('applySettings');
+  const resetSettings = document.getElementById('resetSettings');
+  const testPrint = document.getElementById('testPrint');
+  const previewPaperSize = document.getElementById('previewPaperSize');
+  const previewMargins = document.getElementById('previewMargins');
+  const previewFontSize = document.getElementById('previewFontSize');
+
+  // Initialize transaction type
+  updateTransactionType();
+
+  // Transaction type change handler
+  transactionRadios.forEach(radio => {
+    radio.addEventListener('change', function() {
+      transactionType = this.value;
+      updateTransactionType();
+      updatePreview();
+    });
+  });
+
+  // Update labels based on transaction type
+  function updateTransactionType() {
+    if (transactionType === 'gift') {
+      sellerLabel.textContent = '۴۔ نام واہب';
+      document.getElementById('sellerName').placeholder = 'نام واہب';
+      buyerLabel.textContent = '۵۔ نام موہوب الیہ';
+      document.getElementById('buyerName').placeholder = 'نام موہوب الیہ';
+    } else {
+      sellerLabel.textContent = '۴۔ نام بائع';
+      document.getElementById('sellerName').placeholder = 'نام بائع';
+      buyerLabel.textContent = '۵۔ نام مشتری';
+      document.getElementById('buyerName').placeholder = 'نام مشتری';
+    }
+  }
+
+  // CNIC format: 5-7-1
+  function formatCnic(raw) {
+    const digits = String(raw||'').replace(/\D/g,'').slice(0,13);
+    if (digits.length <= 5) return digits;
+    if (digits.length <= 12) return digits.slice(0,5) + '-' + digits.slice(5);
+    return digits.slice(0,5) + '-' + digits.slice(5,12) + '-' + digits.slice(12);
+  }
+
+  // Mobile format: 0000-0000000 (11 digits)
+  function formatMobile(raw) {
+    const digits = String(raw||'').replace(/\D/g,'').slice(0,11);
+    if (digits.length <= 4) return digits;
+    return digits.slice(0,4) + '-' + digits.slice(4);
+  }
+
+  // Show global success message at top left corner
+  function showSuccess(message) {
+    globalSuccessMessage.textContent = message;
+    globalSuccessMessage.style.display = 'block';
+    setTimeout(() => {
+      globalSuccessMessage.style.display = 'none';
+    }, 3000);
+  }
+
+  // Save current data
+  function saveRecord() {
+    // Check if we have at least one entry
+    if (sellers.length === 0 && buyers.length === 0 && verifiers.length === 0) {
+      alert('براہ کرم کم از کم ایک اندراج شامل کریں');
+      return false;
+    }
+    
+    // Check if we have required fields
+    if (!taskNo.value || !mauza.value || !area.value) {
+      alert('براہ کرم تمام ضروری فیلڈز بھریں (ٹاسک نمبر، موضع، رقبہ)');
+      return false;
+    }
+
+    // Check if link field is filled
+    if (!link.value.trim()) {
+      alert('براہ کرم لنک فیلڈ بھریں');
+      link.focus();
+      return false;
+    }
+
+    // Store all data including mobile numbers
+    const record = {
+      taskNo: taskNo.value,
+      mauza: mauza.value,
+      area: area.value,
+      link: link.value,
+      sellers: [...sellers],
+      buyers: [...buyers],
+      verifiers: [...verifiers],
+      transactionType: transactionType,
+      timestamp: new Date().toISOString(),
+      date: new Date().toLocaleDateString('ur-PK')
+    };
+
+    // Get existing records
+    const existingRecords = storage.loadData();
+    
+    // Check if this is a duplicate of an existing record
+    const isDuplicate = existingRecords.some(existingRecord => 
+      existingRecord.taskNo === record.taskNo &&
+      existingRecord.mauza === record.mauza &&
+      existingRecord.area === record.area
+    );
+
+    if (isDuplicate) {
+      showSuccess('یہ ریکارڈ پہلے سے موجود ہے');
+      return false;
+    }
+    
+    // Add new record
+    existingRecords.unshift(record);
+    
+    // Save data
+    if (storage.saveData(existingRecords)) {
+      // Reset the loaded record flag so new records can be saved
+      isLoadedFromRecord = false;
+      return true;
+    } else {
+      alert('ڈیٹا محفوظ کرنے میں مسئلہ پیش آیا');
+      return false;
+    }
+  }
+
+  // Export data to JSON file
+  exportBtn.addEventListener('click', function() {
+    const records = storage.loadData();
+    if (records.length === 0) {
+      alert('کوئی ڈیٹا برآمد کرنے کے لیے موجود نہیں ہے');
+      return;
+    }
+    storage.exportData(records);
+    showSuccess('ڈیٹا کامیابی سے ڈاؤن لوڈ ہو گیا');
+  });
+
+  // Import data from JSON file
+  importBtn.addEventListener('click', function() {
+    importFile.click();
+  });
+
+  importFile.addEventListener('change', function(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    storage.importData(
+      file,
+      function(importedData) {
+        // Validate the imported data structure
+        if (!Array.isArray(importedData)) {
+          throw new Error('غلط ڈیٹا فارمیٹ');
+        }
+
+        // Basic validation
+        const isValid = importedData.every(record => 
+          record && typeof record === 'object' && 
+          ('taskNo' in record) && ('sellers' in record)
+        );
+
+        if (!isValid) {
+          throw new Error('غلط ڈیٹا ڈھانچہ');
+        }
+
+        if (confirm(`کیا آپ واقعی ${importedData.length} ریکارڈز درآمد کرنا چاہتے ہیں؟ موجودہ ڈیٹا محفوظ رہے گا۔`)) {
+          // Merge with existing records (avoid duplicates)
+          const existingRecords = storage.loadData();
+          const existingKeys = new Set(existingRecords.map(r => `${r.taskNo}-${r.mauza}-${r.area}`));
+          
+          const newRecords = importedData.filter(record => 
+            !existingKeys.has(`${record.taskNo}-${r.mauza}-${r.area}`)
+          );
+
+          const mergedRecords = [...newRecords, ...existingRecords];
+          storage.saveData(mergedRecords);
+          
+          showSuccess(`${newRecords.length} نئے ریکارڈز کامیابی سے درآمد ہو گئے`);
+          
+          // Reset file input
+          event.target.value = '';
+        }
+      },
+      function(error) {
+        alert('غلط فائل فارمیٹ: ' + error.message);
+        event.target.value = '';
+      }
+    );
+  });
+
+  // Search records by keyword
+  function searchRecords(query) {
+    const records = storage.loadData();
+    if (!query) return records;
+    
+    const lowercaseQuery = query.toLowerCase();
+    return records.filter(record => {
+      return (
+        (record.taskNo && record.taskNo.toLowerCase().includes(lowercaseQuery)) ||
+        (record.mauza && record.mauza.toLowerCase().includes(lowercaseQuery)) ||
+        (record.area && record.area.toLowerCase().includes(lowercaseQuery)) ||
+        (record.sellers && record.sellers.some(s => s.name && s.name.toLowerCase().includes(lowercaseQuery))) ||
+        (record.buyers && record.buyers.some(b => b.name && b.name.toLowerCase().includes(lowercaseQuery))) ||
+        (record.verifiers && record.verifiers.some(v => v.name && v.name.toLowerCase().includes(lowercaseQuery)))
+      );
+    });
+  }
+
+  // Display records in modal
+  function displayRecords(recordsToShow = null) {
+    const records = recordsToShow || storage.loadData();
+    recordsList.innerHTML = '';
+
+    if (records.length === 0) {
+      recordsList.innerHTML = '<div class="no-records">کوئی سابقہ ریکارڈ موجود نہیں</div>';
+      return;
+    }
+
+    records.forEach((record, index) => {
+      const recordItem = document.createElement('div');
+      recordItem.className = 'record-item';
+      
+      let allParties = [];
+      
+      // Combine all parties into one array with type indicator
+      if (record.sellers && record.sellers.length > 0) {
+        record.sellers.forEach(seller => {
+          const role = record.transactionType === 'gift' ? 'واہب' : 'بائع';
+          allParties.push({...seller, type: role});
+        });
+      }
+      
+      if (record.buyers && record.buyers.length > 0) {
+        record.buyers.forEach(buyer => {
+          const role = record.transactionType === 'gift' ? 'موہوب الیہ' : 'مشتری';
+          allParties.push({...buyer, type: role});
+        });
+      }
+      
+      if (record.verifiers && record.verifiers.length > 0) {
+        record.verifiers.forEach(verifier => {
+          allParties.push({...verifier, type: 'شناخت کنندہ'});
+        });
+      }
+      
+      let combinedTable = '';
+      if (allParties.length > 0) {
+        combinedTable = `
+          <table class="compact-table">
+            <thead>
+              <tr>
+                <th>نمبر</th>
+                <th>حیثیت</th>
+                <th>نام</th>
+                <th>CNIC</th>
+                <th>موبائل</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${allParties.map((party, idx) => `
+                <tr>
+                  <td>${idx + 1}</td>
+                  <td>${party.type}</td>
+                  <td>${party.name}</td>
+                  <td class="cnic-cell">${party.cnic}</td>
+                  <td class="mobile-cell">${party.mobile || '-'}</td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        `;
+      } else {
+        combinedTable = '<p>کوئی ریکارڈ نہیں</p>';
+      }
+      
+      // Create PDF view button if link exists
+      const pdfButton = record.link ? 
+        `<button class="btn btn-info btn-small" onclick="window.open('${record.link}', '_blank')">پی ڈی ایف دیکھیں</button>` : 
+        '';
+      
+      recordItem.innerHTML = `
+        <div class="record-header">
+          ٹاسک نمبر: ${record.taskNo || '-'} | موضع: ${record.mauza || '-'} | رقبہ: ${record.area || '-'} | تاریخ: ${record.date}
+        </div>
+        
+        <div class="party-section">
+          <h4>کل اندراجات: ${allParties.length}</h4>
+          ${combinedTable}
+        </div>
+        
+        <div class="record-actions">
+          <button class="btn btn-primary btn-small" onclick="loadSpecificRecord(${index})">لوڈ کریں</button>
+          <button class="btn btn-danger btn-small" onclick="confirmDeleteRecord(${index})">حذف کریں</button>
+          ${pdfButton}
+        </div>
+      `;
+      
+      recordsList.appendChild(recordItem);
+    });
+  }
+
+  // Confirm and delete record
+  window.confirmDeleteRecord = function(index) {
+    if (confirm('کیا آپ واقعی یہ ریکارڈ ڈیلیٹ کرنا چاہتے ہیں؟\n\nیہ عمل واپس نہیں ہو سکتا!')) {
+      deleteRecord(index);
+    }
+  };
+
+  // Delete specific record
+  function deleteRecord(index) {
+    const records = storage.loadData();
+    if (records[index]) {
+      records.splice(index, 1);
+      if (storage.saveData(records)) {
+        displayRecords();
+        showSuccess('ریکارڈ کامیابی سے ڈیلیٹ کر دیا گیا');
+      }
+    }
+  }
+
+  // Load specific record by index
+  window.loadSpecificRecord = function(index) {
+    const records = storage.loadData();
+    if (records[index]) {
+      loadRecordData(records[index]);
+      historyModal.style.display = 'none';
+    }
+  };
+
+  // Load specific record data into form
+  function loadRecordData(record) {
+    // Clear current data
+    sellers.length = 0;
+    buyers.length = 0;
+    verifiers.length = 0;
+    
+    // Load basic fields
+    taskNo.value = record.taskNo || '';
+    mauza.value = record.mauza || '';
+    area.value = record.area || '';
+    link.value = record.link || '';
+    
+    // Load transaction type
+    transactionType = record.transactionType || 'sale';
+    document.querySelector(`input[name="transactionType"][value="${transactionType}"]`).checked = true;
+    updateTransactionType();
+    
+    // Load arrays
+    if (record.sellers) {
+      record.sellers.forEach(seller => {
+        sellers.push({ 
+          name: seller.name, 
+          cnic: seller.cnic,
+          mobile: seller.mobile || ''
+        });
+      });
+    }
+    
+    if (record.buyers) {
+      record.buyers.forEach(buyer => {
+        buyers.push({ 
+          name: buyer.name, 
+          cnic: buyer.cnic,
+          mobile: buyer.mobile || ''
+        });
+      });
+    }
+    
+    if (record.verifiers) {
+      record.verifiers.forEach(verifier => {
+        verifiers.push({ 
+          name: verifier.name, 
+          cnic: verifier.cnic,
+          mobile: verifier.mobile || ''
+        });
+      });
+    }
+    
+    // Set flag to indicate data was loaded from a record
+    isLoadedFromRecord = true;
+    
+    // Change print button text
+    printBtn.textContent = 'پرنٹ کریں';
+    
+    // Update preview
+    updatePreview();
+    showSuccess('ریکارڈ لوڈ کر دیا گیا ہے - تبدیلیاں نئے ریکارڈ کے طور پر محفوظ ہوں گی');
+  }
+
+  // CNIC input formatting
+  document.querySelectorAll('.cnic').forEach(el => {
+    el.addEventListener('input', function(){
+      this.value = formatCnic(this.value);
+      this.selectionStart = this.selectionEnd = this.value.length;
+    });
+  });
+
+  // Mobile formatting
+  ['sellerMobile','buyerMobile','verifierMobile'].forEach(id=>{
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.addEventListener('input', function(){
+      this.value = formatMobile(this.value);
+      this.selectionStart = this.selectionEnd = this.value.length;
+    });
+  });
+
+  // addEntry: push to arrays and update preview
+  window.addEntry = function(type){
+    if (type === 'sellers') {
+      const n = document.getElementById('sellerName').value.trim();
+      const c = document.getElementById('sellerCnic').value.trim();
+      const m = document.getElementById('sellerMobile').value.trim() || '-';
+      if (!n || !c) { alert('نام اور CNIC درکار ہے'); return; }
+      sellers.push({ name: n, cnic: c, mobile: m });
+      document.getElementById('sellerName').value = '';
+      document.getElementById('sellerCnic').value = '';
+      document.getElementById('sellerMobile').value = '';
+      showSuccess('بائع/واہب کا اندراج کامیاب');
+      updatePreview();
+    }
+    if (type === 'buyers') {
+      const n = document.getElementById('buyerName').value.trim();
+      const c = document.getElementById('buyerCnic').value.trim();
+      const m = document.getElementById('buyerMobile').value.trim() || '-';
+      if (!n || !c) { alert('نام اور CNIC درکار ہے'); return; }
+      buyers.push({ name: n, cnic: c, mobile: m });
+      document.getElementById('buyerName').value = '';
+      document.getElementById('buyerCnic').value = '';
+      document.getElementById('buyerMobile').value = '';
+      showSuccess('مشتری/موہوب الیہ کا اندراج کامیاب');
+      updatePreview();
+    }
+    if (type === 'verifiers') {
+      const n = document.getElementById('verifierName').value.trim();
+      const c = document.getElementById('verifierCnic').value.trim();
+      const m = document.getElementById('verifierMobile').value.trim() || '-';
+      if (!n || !c) { alert('نام اور CNIC درکار ہے'); return; }
+      verifiers.push({ name: n, cnic: c, mobile: m });
+      document.getElementById('verifierName').value = '';
+      document.getElementById('verifierCnic').value = '';
+      document.getElementById('verifierMobile').value = '';
+      showSuccess('شناخت کنندہ کا اندراج کامیاب');
+      updatePreview();
+    }
+  };
+
+  // Add empty field function
+  window.addEmptyField = function() {
+    verifiers.push({ name: '', cnic: '', mobile: '' });
+    updatePreview();
+    showSuccess('خالی خانہ شامل کر دیا گیا ہے');
+  };
+
+  // Remove entry from array
+  window.removeEntry = function(type, index) {
+    if (type === 'sellers') {
+      sellers.splice(index, 1);
+    } else if (type === 'buyers') {
+      buyers.splice(index, 1);
+    } else if (type === 'verifiers') {
+      verifiers.splice(index, 1);
+    }
+    updatePreview();
+    showSuccess('اندراج حذف کر دیا گیا');
+  };
+
+  // Build table rows
+  function buildTable() {
+    entriesTable.innerHTML = '';
+    
+    const addRow = (role, item, type, index) => {
+      const tr = document.createElement('tr');
+      
+      const tdRole = document.createElement('td'); 
+      tdRole.textContent = role; 
+      tr.appendChild(tdRole);
+      
+      const tdName = document.createElement('td'); 
+      tdName.textContent = item.name || ''; 
+      tr.appendChild(tdName);
+      
+      const tdCnic = document.createElement('td'); 
+      tdCnic.textContent = item.cnic || ''; 
+      tdCnic.style.fontWeight = 'bold';
+      tdCnic.style.direction = 'ltr';
+      tdCnic.style.whiteSpace = 'normal';
+      tdCnic.style.wordBreak = 'break-word';
+      tr.appendChild(tdCnic);
+      
+      const tdMobile = document.createElement('td'); 
+      tdMobile.textContent = item.mobile || '-'; 
+      tdMobile.style.fontWeight = 'bold';
+      tdMobile.style.direction = 'ltr';
+      tdMobile.style.whiteSpace = 'normal';
+      tdMobile.style.wordBreak = 'break-word';
+      tr.appendChild(tdMobile);
+      
+      const tdSign = document.createElement('td'); 
+      tdSign.className = 'signature'; 
+      tr.appendChild(tdSign);
+      
+      // Only add delete button if data is NOT loaded from a record
+      if (!isLoadedFromRecord) {
+        const tdDelete = document.createElement('td');
+        tdDelete.className = 'action-column';
+        const deleteBtn = document.createElement('button');
+        deleteBtn.textContent = 'حذف';
+        deleteBtn.className = 'delete-btn';
+        deleteBtn.onclick = function() { removeEntry(type, index); };
+        tdDelete.appendChild(deleteBtn);
+        tr.appendChild(tdDelete);
+      }
+      
+      entriesTable.appendChild(tr);
+    };
+    
+    // Add sellers/wahib based on transaction type
+    const sellerRole = transactionType === 'gift' ? 'واہب' : 'بائع';
+    sellers.forEach((s, index) => addRow(sellerRole, s, 'sellers', index));
+    
+    // Add buyers/mauhoob ilaihi based on transaction type
+    const buyerRole = transactionType === 'gift' ? 'موہوب الیہ' : 'مشتری';
+    buyers.forEach((b, index) => addRow(buyerRole, b, 'buyers', index));
+    
+    // Add verifiers
+    verifiers.forEach((v, index) => addRow('شناخت کنندہ', v, 'verifiers', index));
+  }
+
+  // Update preview (live)
+  function updatePreview() {
+    outTaskNo.textContent = taskNo.value || '-';
+    outMauza.textContent = mauza.value || '-';
+    outArea.textContent = area.value || '-';
+    buildTable();
+    
+    // Show or hide delete column header based on whether data is loaded from record
+    const actionColumn = document.querySelector('.action-column');
+    if (actionColumn) {
+      actionColumn.style.display = isLoadedFromRecord ? 'none' : '';
+    }
+    
+    // Show paper if we have data, otherwise show empty state
+    if (sellers.length > 0 || buyers.length > 0 || verifiers.length > 0 || 
+        taskNo.value || mauza.value || area.value) {
+      paper.classList.remove('hidden');
+      emptyState.style.display = 'none';
+    } else {
+      paper.classList.add('hidden');
+      emptyState.style.display = 'block';
+    }
+  }
+
+  // Live inputs update preview
+  [taskNo, mauza, area].forEach(el => {
+    if (!el) return;
+    el.addEventListener('input', updatePreview);
+  });
+
+  // Print and Save functionality
+  printBtn.addEventListener('click', function () {
+    updatePreview();
+    
+    // Check if we have at least one entry
+    if (sellers.length === 0 && buyers.length === 0 && verifiers.length === 0) {
+      alert('براہ کرم کم از کم ایک اندراج شامل کریں');
+      return;
+    }
+    
+    // Check if we have required fields
+    if (!taskNo.value || !mauza.value || !area.value) {
+      alert('براہ کرم تمام ضروری فیلڈز بھریں (ٹاسک نمبر، موضع، رقبہ)');
+      return;
+    }
+
+    // Check if link field is filled
+    if (!link.value.trim()) {
+      alert('براہ کرم لنک فیلڈ بھریں');
+      link.focus();
+      return;
+    }
+    
+    // Save record first (if not loaded from record)
+    if (!isLoadedFromRecord) {
+      if (saveRecord()) {
+        showSuccess('ڈیٹا محفوظ اور پرنٹ تیار ہے');
+      }
+    } else {
+      showSuccess('پرنٹ تیار ہے');
+    }
+    
+    // Ensure paper is visible and properly formatted for print
+    paper.classList.remove('hidden');
+    
+    // Small delay to ensure DOM updates before print
+    setTimeout(() => {
+      window.print();
+    }, 300);
+  });
+
+  // History button functionality
+  historyBtn.addEventListener('click', function () {
+    displayRecords();
+    historyModal.style.display = 'flex';
+  });
+
+  // Settings button functionality
+  settingsBtn.addEventListener('click', function () {
+    updatePreviewSettings();
+    settingsModal.style.display = 'flex';
+  });
+
+  // Search functionality
+  searchBtn.addEventListener('click', function() {
+    const query = searchInput.value.trim();
+    const filteredRecords = searchRecords(query);
+    displayRecords(filteredRecords);
+  });
+
+  // Search on Enter key
+  searchInput.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+      searchBtn.click();
+    }
+  });
+
+  // Modal close functionality
+  modalClose.forEach(closeBtn => {
+    closeBtn.addEventListener('click', function () {
+      historyModal.style.display = 'none';
+      settingsModal.style.display = 'none';
+    });
+  });
+
+  // Close modal when clicking outside
+  window.addEventListener('click', function (event) {
+    if (event.target === historyModal) {
+      historyModal.style.display = 'none';
+    }
+    if (event.target === settingsModal) {
+      settingsModal.style.display = 'none';
+    }
+  });
+
+  // Reset
+  resetBtn.addEventListener('click', function () {
+    if (confirm('کیا آپ واقعی تمام ڈیٹا صاف کرنا چاہتے ہیں؟')) {
+      sellers.length = buyers.length = verifiers.length = 0;
+      ['taskNo','mauza','area','link','sellerName','sellerCnic','sellerMobile','buyerName','buyerCnic','buyerMobile','verifierName','verifierCnic','verifierMobile']
+        .forEach(id => { const el=document.getElementById(id); if(el) el.value = ''; });
+      entriesTable.innerHTML = '';
+      paper.classList.add('hidden');
+      emptyState.style.display = 'block';
+      // Reset the loaded record flag
+      isLoadedFromRecord = false;
+      // Reset transaction type to default
+      transactionType = 'sale';
+      document.querySelector('input[name="transactionType"][value="sale"]').checked = true;
+      updateTransactionType();
+      // Reset print button text
+      printBtn.textContent = 'پرنٹ/محفوظ کریں';
+      showSuccess('تمام ڈیٹا صاف کر دیا گیا ہے');
+    }
+  });
+
+  // Update preview settings display
+  function updatePreviewSettings() {
+    previewPaperSize.textContent = `${paperWidth.value} x ${paperHeight.value} انچ`;
+    previewMargins.textContent = `اوپر ${marginTop.value}, دائیں ${marginRight.value}, نیچے ${marginBottom.value}, بائیں ${marginLeft.value} انچ`;
+    previewFontSize.textContent = `${fontSize.value} پکسل`;
+  }
+
+  // Apply settings
+  applySettings.addEventListener('click', function() {
+    applyPrintSettings();
+    updatePreviewSettings();
+    showSuccess('پرنٹ ترتیبات لاگو کر دی گئی ہیں');
+  });
+
+  // Reset settings to default
+  resetSettings.addEventListener('click', function() {
+    paperWidth.value = 8.5;
+    paperHeight.value = 14;
+    marginTop.value = 0.5;
+    marginRight.value = 1;
+    marginBottom.value = 1;
+    marginLeft.value = 1;
+    fontSize.value = 17;
+    tablePadding.value = 4;
+    applyPrintSettings();
+    updatePreviewSettings();
+    showSuccess('ترتیبات ڈیفالٹ پر واپس کر دی گئی ہیں');
+  });
+
+  // Test print
+  testPrint.addEventListener('click', function() {
+    applyPrintSettings();
+    updatePreview();
+    paper.classList.remove('hidden');
+    
+    setTimeout(() => {
+      window.print();
+    }, 300);
+  });
+
+  // Apply print settings dynamically
+  function applyPrintSettings() {
+    let printStyle = document.getElementById('dynamic-print-style');
+    if (!printStyle) {
+      printStyle = document.createElement('style');
+      printStyle.id = 'dynamic-print-style';
+      printStyle.media = 'print';
+      document.head.appendChild(printStyle);
+    }
+    
+    const css = `
+      @page {
+        size: ${paperWidth.value}in ${paperHeight.value}in;
+        margin: ${marginTop.value}in ${marginRight.value}in ${marginBottom.value}in ${marginLeft.value}in !important;
+      }
+      
+      body, html {
+        margin: 0 !important;
+        padding: 0 !important;
+        background: white !important;
+        width: 100% !important;
+        height: auto !important;
+        direction: rtl !important;
+      }
+      
+      #paper {
+        padding: 0 !important;
+        margin: 0 !important;
+        font-size: ${fontSize.value}px !important;
+        background: white !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+        min-height: 0 !important;
+        direction: rtl !important;
+        page-break-after: avoid !important;
+      }
+      
+      .paper, .meta-line, .center-block, .after-table, .after-sign,
+      table.form-table, table.form-table th, table.form-table td {
+        direction: rtl !important;
+        text-align: right !important;
+      }
+      
+      table.form-table td:nth-child(3),
+      table.form-table td:nth-child(4) {
+        direction: ltr !important;
+        text-align: center !important;
+      }
+      
+      table.form-table th, 
+      table.form-table td { 
+        padding: ${tablePadding.value}px 6px !important;
+      }
+      
+      .paper h2 {
+        font-size: ${parseInt(fontSize.value) + 6}px !important;
+        text-align: center !important;
+      }
+      
+      .meta-line, .highlighted {
+        font-size: ${parseInt(fontSize.value) + 3}px !important;
+        text-align: center !important;
+      }
+      
+      .paper p {
+        font-size: ${parseInt(fontSize.value) + 1}px !important;
+        text-align: justify !important;
+      }
+      
+      .center-block, .after-table, .after-sign {
+        font-size: ${parseInt(fontSize.value) + 2}px !important;
+      }
+      
+      .center-block {
+        text-align: center !important;
+      }
+      
+      .after-table {
+        text-align: right !important;
+      }
+      
+      .after-sign {
+        text-align: center !important;
+      }
+      
+      table.form-table th {
+        background: var(--gray-bg) !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      
+      .center-block {
+        background: #f8f9fa !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+    `;
+    
+    printStyle.textContent = css;
+  }
+
+  // Initialize settings preview
+  updatePreviewSettings();
+  
+  // Apply default settings on load
+  applyPrintSettings();
+
+  // ensure initial preview hidden until user types
+  paper.classList.add('hidden');
+});
+</script>
+</body>
+</html>
