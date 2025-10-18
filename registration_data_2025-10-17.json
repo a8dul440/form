@@ -1,0 +1,262 @@
+[
+  {
+    "taskNo": "12156467",
+    "mauza": "بصیرپور",
+    "area": "0-5-242",
+    "link": "https://eregistration.punjab-zameen.gov.pk/Reports/ReportViewer.aspx?processId=uaHXTHkfcWMIBYcOtQ1H-UJ58QNBLfRsTP9Rmg0Qz+0&ReportType=registryReport&tehsilId=81",
+    "sellers": [
+      {
+        "name": "بیگم نفیس چوہدری بیوہ علی اکبر",
+        "cnic": "35301-1855333-8",
+        "mobile": "-"
+      }
+    ],
+    "buyers": [
+      {
+        "name": "محمد حسنین ولد علی اکبر",
+        "cnic": "35301-6003532-5",
+        "mobile": "-"
+      }
+    ],
+    "verifiers": [
+      {
+        "name": "خلیل احمد ولد نور احمد",
+        "cnic": "35301-2034593-1",
+        "mobile": "-"
+      },
+      {
+        "name": "ظہور احمد ولد قطب دین",
+        "cnic": "35301-1911843-9",
+        "mobile": "-"
+      }
+    ],
+    "transactionType": "gift",
+    "timestamp": "2025-10-17T06:21:04.367Z",
+    "date": "17/10/2025"
+  },
+  {
+    "taskNo": "12156282",
+    "mauza": "بصیرپور",
+    "area": "0-3-242",
+    "link": "https://eregistration.punjab-zameen.gov.pk/Reports/ReportViewer.aspx?processId=fWL4wdnYT+WxJhY7M9A+QbnrRpfu+E1jRUZZoDvtnX4&ReportType=registryReport&tehsilId=81",
+    "sellers": [
+      {
+        "name": "بیگم نفیس چوہدری بیوہ علی اکبر",
+        "cnic": "35301-1855333-8",
+        "mobile": "-"
+      },
+      {
+        "name": "عندلیب فرح زوجہ محمد نعیم اللہ",
+        "cnic": "35301-0365953-6",
+        "mobile": "-"
+      },
+      {
+        "name": "عنبرین زوجہ حافظ محمد حسنین علی",
+        "cnic": "35301-1069536-2",
+        "mobile": "-"
+      },
+      {
+        "name": "معطر سنبل زوجہ محمد نصیراللہ",
+        "cnic": "35301-1068586-2",
+        "mobile": "-"
+      }
+    ],
+    "buyers": [
+      {
+        "name": "محمد حسنین ولد علی اکبر",
+        "cnic": "35301-6003532-5",
+        "mobile": "-"
+      }
+    ],
+    "verifiers": [
+      {
+        "name": "خلیل احمد ولد نور احمد",
+        "cnic": "35301-2034593-1",
+        "mobile": "-"
+      },
+      {
+        "name": "ظہور احمد ولد قطب دین",
+        "cnic": "35301-1911843-9",
+        "mobile": "-"
+      }
+    ],
+    "transactionType": "sale",
+    "timestamp": "2025-10-17T06:13:34.685Z",
+    "date": "17/10/2025"
+  },
+  {
+    "taskNo": "12155550",
+    "mauza": "بصیرپور",
+    "area": "0-4-0",
+    "link": "https://eregistration.punjab-zameen.gov.pk/Reports/ReportViewer.aspx?processId=jDYlKjTrfR-XNNO5OSVbxdsfszfGwG9fv9+LiTnjOl8&ReportType=registryReport&tehsilId=81",
+    "sellers": [
+      {
+        "name": "نوید شریف ولد محمد شریف",
+        "cnic": "35101-5634624-9",
+        "mobile": "-"
+      }
+    ],
+    "buyers": [
+      {
+        "name": "محمد نعیم ولد ذولفقار علی",
+        "cnic": "35301-2694808-9",
+        "mobile": "-"
+      }
+    ],
+    "verifiers": [
+      {
+        "name": "محمد منشاء ولد محمد شعبان",
+        "cnic": "35301-2021259-7",
+        "mobile": "-"
+      },
+      {
+        "name": "محمد یار ولد پہلوان",
+        "cnic": "35301-2004027-1",
+        "mobile": "-"
+      }
+    ],
+    "transactionType": "sale",
+    "timestamp": "2025-10-17T05:31:01.894Z",
+    "date": "17/10/2025"
+  },
+  {
+    "taskNo": "12151113",
+    "mauza": "بصیرپور",
+    "area": "0-7-0",
+    "link": "https://eregistration.punjab-zameen.gov.pk/Reports/ReportViewer.aspx?processId=YrhTa0mf+ngJD-FuIeWb+nwjBi+RuzRBuq7anQxImIE&ReportType=registryReport&tehsilId=81",
+    "sellers": [
+      {
+        "name": "امانت علی ولد نعمت علی",
+        "cnic": "35301-3154041-9",
+        "mobile": "-"
+      }
+    ],
+    "buyers": [
+      {
+        "name": "امتیاز علی ولد نذیر احمد",
+        "cnic": "35301-5533874-1",
+        "mobile": "-"
+      }
+    ],
+    "verifiers": [
+      {
+        "name": "آفتاب علی ولد نذیر احمد",
+        "cnic": "35301-7218650-9",
+        "mobile": "-"
+      },
+      {
+        "name": "",
+        "cnic": "",
+        "mobile": ""
+      }
+    ],
+    "transactionType": "sale",
+    "timestamp": "2025-10-15T10:46:50.425Z",
+    "date": "15/10/2025"
+  },
+  {
+    "taskNo": "12153392",
+    "mauza": "بصیرپور",
+    "area": "0-3-0",
+    "link": "https://eregistration.punjab-zameen.gov.pk/Reports/ReportViewer.aspx?processId=4yUCnnMUFTDzlfPm3E8bTZVeP79dSD5lU9dbiuTLnv4&ReportType=registryReport&tehsilId=81",
+    "sellers": [
+      {
+        "name": "عبدالغفور ولد محمد شریف",
+        "cnic": "35301-1865282-5",
+        "mobile": "-"
+      }
+    ],
+    "buyers": [
+      {
+        "name": "محمدبلال ولد عبدالغفور",
+        "cnic": "35301-9287899-9",
+        "mobile": "-"
+      }
+    ],
+    "verifiers": [
+      {
+        "name": "",
+        "cnic": "",
+        "mobile": ""
+      },
+      {
+        "name": "",
+        "cnic": "",
+        "mobile": ""
+      }
+    ],
+    "transactionType": "gift",
+    "timestamp": "2025-10-15T10:44:34.368Z",
+    "date": "15/10/2025"
+  },
+  {
+    "taskNo": "12149989",
+    "mauza": "بصیرپور",
+    "area": "0-2-0",
+    "link": "https://eregistration.punjab-zameen.gov.pk/Reports/ReportViewer.aspx?processId=s9bN+LOaT49A4ze8ojTVtqm+12pLsqmCSmlSbAuktg4&ReportType=registryReport&tehsilId=81",
+    "sellers": [
+      {
+        "name": "محمد یسین ولد محمد دین",
+        "cnic": "35101-2373746-9",
+        "mobile": "-"
+      }
+    ],
+    "buyers": [
+      {
+        "name": "ام کلثوم زوجہ محمد حنیف",
+        "cnic": "35301-1899581-6",
+        "mobile": "-"
+      }
+    ],
+    "verifiers": [
+      {
+        "name": "",
+        "cnic": "",
+        "mobile": ""
+      },
+      {
+        "name": "",
+        "cnic": "",
+        "mobile": ""
+      }
+    ],
+    "transactionType": "sale",
+    "timestamp": "2025-10-15T10:38:50.801Z",
+    "date": "15/10/2025"
+  },
+  {
+    "taskNo": "12155301",
+    "mauza": "بصیرپور",
+    "area": "0-4-0",
+    "link": "https://eregistration.punjab-zameen.gov.pk/Reports/ReportViewer.aspx?processId=d5bNgE+GS8pX7l0K14AewtamEh15w95LEImnnpibhBE&ReportType=registryReport&tehsilId=81",
+    "sellers": [
+      {
+        "name": "محمد اسلم ولد سید محمد",
+        "cnic": "42101-5888345-5",
+        "mobile": "-"
+      }
+    ],
+    "buyers": [
+      {
+        "name": "شاہد اقبال ولد محمد اقبال",
+        "cnic": "35301-0501345-5",
+        "mobile": "-"
+      }
+    ],
+    "verifiers": [
+      {
+        "name": "غلا م شبیر ولد محمدامین",
+        "cnic": "35301-3062432-5",
+        "mobile": "-"
+      },
+      {
+        "name": "محمد احمد ولد بشیر احمد",
+        "cnic": "35301-3550851-7",
+        "mobile": "-"
+      }
+    ],
+    "transactionType": "sale",
+    "timestamp": "2025-10-15T09:21:17.963Z",
+    "date": "15/10/2025"
+  }
+]
