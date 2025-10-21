@@ -1513,23 +1513,24 @@ document.addEventListener('DOMContentLoaded', function () {
           throw new Error('غلط ڈیٹا ڈھانچہ');
         }
 
-        if (confirm(`کیا آپ واقعی ${importedData.length} ریکارڈز درآمد کرنا چاہتے ہیں؟ موجودہ ڈیٹا محفوظ رہے گا۔`)) {
-          // Merge with existing records (avoid duplicates)
-          const existingRecords = storage.loadData();
-          const existingKeys = new Set(existingRecords.map(r => `${r.taskNo}-${r.mauza}-${r.area}`));
-          
-          const newRecords = importedData.filter(record => 
-            !existingKeys.has(`${record.taskNo}-${r.mauza}-${r.area}`)
-          );
+    if (confirm(`کیا آپ واقعی ${importedData.length} ریکارڈز درآمد کرنا چاہتے ہیں؟ موجودہ ڈیٹا محفوظ رہے گا۔`)) {
+    // Merge with existing records (avoid duplicates)
+    const existingRecords = storage.loadData();
+    const existingKeys = new Set(existingRecords.map(r => `${r.taskNo}-${r.mauza}-${r.area}`));
+    
+    // FIXED: Changed r.mauza and r.area to record.mauza and record.area
+    const newRecords = importedData.filter(record => 
+        !existingKeys.has(`${record.taskNo}-${record.mauza}-${record.area}`)
+    );
 
-          const mergedRecords = [...newRecords, ...existingRecords];
-          storage.saveData(mergedRecords);
-          
-          showSuccess(`${newRecords.length} نئے ریکارڈز کامیابی سے درآمد ہو گئے`);
-          
-          // Reset file input
-          event.target.value = '';
-        }
+    const mergedRecords = [...newRecords, ...existingRecords];
+    storage.saveData(mergedRecords);
+    
+    showSuccess(`${newRecords.length} نئے ریکارڈز کامیابی سے درآمد ہو گئے`);
+    
+    // Reset file input
+    event.target.value = '';
+}
       },
       function(error) {
         alert('غلط فائل فارمیٹ: ' + error.message);
